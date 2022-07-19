@@ -2,12 +2,18 @@
 
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class NewTransaction extends StatefulWidget {
   final Function addTx;
 
   NewTransaction(this.addTx);
+
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -18,10 +24,12 @@ class NewTransaction extends StatelessWidget {
       return;
     }
 
-    addTx(
+    widget.addTx(
       enteredTitle,
       enteredAmount,
     );
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -46,15 +54,21 @@ class NewTransaction extends StatelessWidget {
               keyboardType: TextInputType.number,
               onSubmitted: (_) => submitData(),
             ),
-            TextButton(
-              // ignore: sort_child_properties_last
-              child: Text(
-                'Add Transaction',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: submitData,
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
+            Container(
+              margin: EdgeInsets.only(top: 22),
+              child: TextButton(
+                // ignore: sort_child_properties_last
+                child: Text(
+                  'Add Transaction',
+                  style: TextStyle(
+                    color: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                ),
+                onPressed: submitData,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.pink),
+                ),
               ),
             ),
           ],
