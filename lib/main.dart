@@ -1,7 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
@@ -20,6 +18,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Quicksand',
         primarySwatch: Colors.pink,
         accentColor: Colors.black87,
+        errorColor: Colors.red,
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
             fontFamily: 'OpenSans',
@@ -77,11 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(
+    String txTitle,
+    double txAmount,
+    DateTime chosenDate,
+  ) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
@@ -97,6 +100,12 @@ class _MyHomePageState extends State<MyHomePage> {
         return (NewTransaction(_addNewTransaction));
       },
     );
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    });
   }
 
   @override
@@ -116,7 +125,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(
+              _userTransactions,
+              _deleteTransaction,
+            ),
           ],
         ),
       ),
