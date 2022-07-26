@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../widgets/chart_bar.dart';
@@ -39,26 +41,40 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     print(groupTransactionValues);
     return Card(
+      color: Theme.of(context).backgroundColor,
       elevation: 6,
       margin: EdgeInsets.all(25),
-      child: Padding(
-        padding: EdgeInsets.all(7),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupTransactionValues.map((data) {
-            return Flexible(
-              flex: 1,
-              fit: FlexFit.tight,
-              child: ChartBar(
-                data['day'],
-                data['amount'],
-                totalSpending == 0.0
-                    ? 0.0
-                    : (data['amount'] as double) / totalSpending,
-              ),
-            );
-          }).toList(),
-        ),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              'Expenses for the last week:',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(7),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: groupTransactionValues.map((data) {
+                return Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: ChartBar(
+                    data['day'],
+                    data['amount'],
+                    totalSpending == 0.0
+                        ? 0.0
+                        : (data['amount'] as double) / totalSpending,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

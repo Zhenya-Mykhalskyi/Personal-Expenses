@@ -15,7 +15,7 @@ class NewTransaction extends StatefulWidget {
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  DateTime _selectedDate;
+  DateTime _selectedDate = DateTime.now();
 
   void _submitData() {
     if (_amountController.text.isEmpty) {
@@ -57,20 +57,37 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).backgroundColor,
       elevation: 5,
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: InputDecoration(
+                labelText: 'Name',
+                labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                hintText: 'Please enter a product name',
+                hintStyle: TextStyle(
+                  color: Color.fromARGB(180, 197, 197, 197),
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
               //onChanged: (val) => titleInput = val,
               controller: _titleController,
               onSubmitted: (_) => _submitData(),
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
+              decoration: InputDecoration(
+                labelText: 'Price',
+                labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                hintText: 'Please enter a price',
+                hintStyle: TextStyle(
+                  color: Color.fromARGB(180, 197, 197, 197),
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
               // onChanged: (val) => amountInput = val,
               controller: _amountController,
               keyboardType: TextInputType.number,
@@ -85,6 +102,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       _selectedDate == null
                           ? 'No date chosen'
                           : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                   TextButton(
@@ -96,7 +114,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     child: Text(
                       'Chose Date',
                       style: TextStyle(
-                          color: Color.fromARGB(255, 47, 47, 47),
+                          color: Color.fromARGB(255, 255, 255, 255),
                           fontWeight: FontWeight.bold),
                     ),
                   )
@@ -116,7 +134,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 ),
                 onPressed: _submitData,
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.pink),
+                  backgroundColor: MaterialStateProperty.all(Colors.orange),
                 ),
               ),
             ),

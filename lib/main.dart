@@ -15,28 +15,37 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Personal Expenses',
       theme: ThemeData(
-        fontFamily: 'Quicksand',
-        primarySwatch: Colors.pink,
-        accentColor: Colors.black87,
+        // fontFamily: 'Quicksand',
+        primarySwatch: Colors.orange,
+        accentColor: Colors.white,
         errorColor: Colors.red,
+        backgroundColor: Colors.grey[900],
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
-          color: Color.fromARGB(255, 38, 38, 38),
+          color: Color.fromARGB(255, 14, 14, 14),
         ),
         textTheme: ThemeData.light().textTheme.copyWith(
               titleMedium: TextStyle(
-                fontFamily: 'Quicksand',
+                fontFamily: 'OpenSans',
+                // fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
+                color: Colors.white,
               ),
               titleLarge: TextStyle(
-                fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
+                color: Colors.white,
+              ),
+              titleSmall: TextStyle(
+                fontFamily: 'OpenSans',
+                // fontFamily: 'Quicksand',
+                fontSize: 13,
+                color: Colors.white,
               ),
             ),
       ),
@@ -111,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
           title: Text(
             'Personal Expenses',
@@ -119,6 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               onPressed: () => _startAddNewTransaction(context),
               icon: Icon(Icons.add),
+              color: Theme.of(context).accentColor,
             ),
           ]),
       body: SingleChildScrollView(

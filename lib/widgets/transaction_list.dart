@@ -17,36 +17,43 @@ class TransactionList extends StatelessWidget {
       child: transactions.isEmpty
           ? Column(
               children: [
+                SizedBox(
+                  height: 15,
+                ),
                 Text(
                   'No Transactions added yet!',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  height: 220,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
+
+                // Container(
+                //   height: 75,
+                //   child: Image.asset(
+                //     'assets/images/waiting.png',
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
               ],
             )
           : ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
-                  elevation: 5,
-                  color: Color.fromARGB(255, 246, 246, 246),
+                  elevation: 10,
+                  // shadowColor: Color.fromARGB(144, 2, 133, 87),
+                  color: Color.fromARGB(45, 0, 122, 100),
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 30,
+                      backgroundColor: Color.fromARGB(255, 21, 21, 21),
                       child: Padding(
                         padding: EdgeInsets.all(8),
                         child: FittedBox(
                           child: Text(
-                            '\$ ${transactions[index].amount.toStringAsFixed(2)}',
+                            '₴ ${transactions[index].amount.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              color: Theme.of(context).accentColor,
+                            ),
                           ),
                         ),
                       ),
@@ -55,10 +62,11 @@ class TransactionList extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge),
                     subtitle: Text(
                       DateFormat.yMMMd().format(transactions[index].date),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.delete),
-                      // color: Theme.of(context).errorColor,
+                      color: Theme.of(context).accentColor,
                       onPressed: () => deleteTx(
                         transactions[index].id,
                       ),
