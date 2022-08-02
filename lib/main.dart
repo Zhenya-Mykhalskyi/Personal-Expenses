@@ -136,6 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Card(
+            //   child: Text("Last week", textScaleFactor: 1.1),
+            // ),
             Container(
               height: (MediaQuery.of(context).size.height -
                       appBar.preferredSize.height -
