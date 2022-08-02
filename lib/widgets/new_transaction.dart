@@ -67,7 +67,9 @@ class _NewTransactionState extends State<NewTransaction> {
             TextField(
               decoration: InputDecoration(
                 labelText: 'Name',
-                labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                labelStyle: TextStyle(
+                  color: Theme.of(context).accentColor,
+                ),
                 hintText: 'Please enter a product name',
                 hintStyle: TextStyle(
                   color: Color.fromARGB(180, 197, 197, 197),
@@ -114,7 +116,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     child: Text(
                       'Chose Date',
                       style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold),
                     ),
                   )
