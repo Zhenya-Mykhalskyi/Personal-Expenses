@@ -13,24 +13,27 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-        ? Column(
-            children: [
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                'No Transactions added yet!',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-
-              // Container(
-              //   height: 75,
-              //   child: Image.asset(
-              //     'assets/images/waiting.png',
-              //     fit: BoxFit.cover,
-              //   ),
-              // ),
-            ],
+        ? LayoutBuilder(
+            builder: ((ctx, index) {
+              return Column(
+                children: [
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    'No Transactions added yet!',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  // Container(
+                  //   height: 75,
+                  //   child: Image.asset(
+                  //     'assets/images/waiting.png',
+                  //     fit: BoxFit.cover,
+                  //   ),
+                  // ),
+                ],
+              );
+            }),
           )
         : ListView.builder(
             itemBuilder: (ctx, index) {
@@ -62,13 +65,22 @@ class TransactionList extends StatelessWidget {
                     DateFormat.yMMMd().format(transactions[index].date),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    color: Theme.of(context).accentColor,
-                    onPressed: () => deleteTx(
-                      transactions[index].id,
-                    ),
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 460
+                      ? FlatButton.icon(
+                          onPressed: () => deleteTx(
+                            transactions[index].id,
+                          ),
+                          label: Text('Delete'),
+                          icon: Icon(Icons.delete),
+                          textColor: Theme.of(context).accentColor,
+                        )
+                      : IconButton(
+                          icon: Icon(Icons.delete),
+                          color: Theme.of(context).accentColor,
+                          onPressed: () => deleteTx(
+                            transactions[index].id,
+                          ),
+                        ),
                 ),
               );
 

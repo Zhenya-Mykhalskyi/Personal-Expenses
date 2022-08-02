@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import './adaptive_flat_button.dart';
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
@@ -56,91 +60,86 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).backgroundColor,
-      elevation: 5,
-      child: Container(
-        padding: EdgeInsets.all(14),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Name',
-                labelStyle: TextStyle(
-                  color: Theme.of(context).accentColor,
-                ),
-                hintText: 'Please enter a product name',
-                hintStyle: TextStyle(
-                  color: Color.fromARGB(180, 197, 197, 197),
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              //onChanged: (val) => titleInput = val,
-              controller: _titleController,
-              onSubmitted: (_) => _submitData(),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Price',
-                labelStyle: TextStyle(color: Theme.of(context).accentColor),
-                hintText: 'Please enter a price',
-                hintStyle: TextStyle(
-                  color: Color.fromARGB(180, 197, 197, 197),
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              // onChanged: (val) => amountInput = val,
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => _submitData(),
-            ),
-            Container(
-              height: 50,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? 'No date chosen'
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                      style: TextStyle(color: Colors.white),
-                    ),
+    return SingleChildScrollView(
+      child: Card(
+        color: Theme.of(context).backgroundColor,
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).accentColor,
                   ),
-                  TextButton(
-                    style: ButtonStyle(
-                        // backgroundColor: MaterialStateProperty.all(
-                        //     Color.fromARGB(255, 84, 84, 84)),
-                        ),
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      'Chose Date',
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 15),
-              child: TextButton(
-                // ignore: sort_child_properties_last
-                child: Text(
-                  'Add Transaction',
-                  style: TextStyle(
-                    color: Colors.white,
-                    backgroundColor: Theme.of(context).primaryColor,
+                  hintText: 'Please enter a product name',
+                  hintStyle: TextStyle(
+                    color: Color.fromARGB(180, 197, 197, 197),
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
-                onPressed: _submitData,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.orange),
+                //onChanged: (val) => titleInput = val,
+                controller: _titleController,
+                onSubmitted: (_) => _submitData(),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Price',
+                  labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                  hintText: 'Please enter a price',
+                  hintStyle: TextStyle(
+                    color: Color.fromARGB(180, 197, 197, 197),
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                // onChanged: (val) => amountInput = val,
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => _submitData(),
+              ),
+              Container(
+                height: 50,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No date chosen'
+                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    AdaptiveFlatButton('Choose Date', _presentDatePicker),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: TextButton(
+                  // ignore: sort_child_properties_last
+                  child: Text(
+                    'Add Transaction',
+                    style: TextStyle(
+                      color: Colors.white,
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  onPressed: _submitData,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.orange),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
