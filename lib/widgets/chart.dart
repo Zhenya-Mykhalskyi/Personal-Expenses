@@ -45,7 +45,7 @@ class Chart extends StatelessWidget {
     return Card(
       color: Theme.of(context).backgroundColor,
       elevation: 6,
-      margin: EdgeInsets.all(25),
+      margin: EdgeInsets.all(20),
       child:
           // child: Column(
           //   mainAxisSize: MainAxisSize.min,
@@ -59,27 +59,30 @@ class Chart extends StatelessWidget {
           //         fontWeight: FontWeight.w700),
           //   ),
           // ),
-          LayoutBuilder(builder: (context, constraints) {
-        return Container(
-          height: constraints.maxHeight * 0.7,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: groupTransactionValues.map((data) {
-              return Flexible(
-                flex: 1,
-                fit: FlexFit.tight,
-                child: ChartBar(
-                  data['day'],
-                  data['amount'],
-                  totalSpending == 0.0
-                      ? 0.0
-                      : (data['amount'] as double) / totalSpending,
-                ),
-              );
-            }).toList(),
-          ),
-        );
-      }),
+          Padding(
+        padding: EdgeInsets.all(6),
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Container(
+            height: constraints.maxHeight * 0.7,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: groupTransactionValues.map((data) {
+                return Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: ChartBar(
+                    data['day'],
+                    data['amount'],
+                    totalSpending == 0.0
+                        ? 0.0
+                        : (data['amount'] as double) / totalSpending,
+                  ),
+                );
+              }).toList(),
+            ),
+          );
+        }),
+      ),
     );
   }
 }
