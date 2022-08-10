@@ -227,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     print('build() MyHomePageState');
     final mediaQuery = MediaQuery.of(context);
-    final isLandScape =
+    final _isLandScape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     final PreferredSizeWidget appBar = _buildAppBar();
 
@@ -247,9 +247,9 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if (isLandScape)
+            if (_isLandScape)
               ..._buildLandscapeContent(mediaQuery, appBar, txListWidget),
-            if (!isLandScape)
+            if (!_isLandScape)
               ..._buildPortraitContent(mediaQuery, appBar, txListWidget),
           ],
         ),

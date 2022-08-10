@@ -88,6 +88,9 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
+    final _isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -95,12 +98,19 @@ class _NewTransactionState extends State<NewTransaction> {
             color: Theme.of(context).backgroundColor,
             elevation: 5,
             child: Container(
-              padding: EdgeInsets.only(
-                top: 10,
-                left: 10,
-                right: 10,
-                bottom: MediaQuery.of(context).viewInsets.bottom + 10,
-              ),
+              padding: _isLandScape
+                  ? EdgeInsets.only(
+                      top: 10,
+                      left: 10,
+                      right: 10,
+                      bottom: MediaQuery.of(context).viewInsets.bottom + 40,
+                    )
+                  : EdgeInsets.only(
+                      top: 10,
+                      left: 10,
+                      right: 10,
+                      bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+                    ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
