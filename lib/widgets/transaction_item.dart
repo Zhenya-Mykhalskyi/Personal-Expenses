@@ -22,17 +22,17 @@ class TransactionItem extends StatefulWidget {
 class _TransactionItemState extends State<TransactionItem> {
   Color _bgColor;
   @override
-  void initState() {
-    const avalibleColors = [
-      Colors.red,
-      Colors.black,
-      Colors.yellow,
-      Colors.blue,
-    ];
+  // void initState() {
+  //   const avalibleColors = [
+  //     Colors.red,
+  //     Colors.black,
+  //     Colors.green,
+  //     Colors.blue,
+  //   ];
 
-    _bgColor = avalibleColors[Random().nextInt(4)];
-    super.initState();
-  }
+  //   _bgColor = avalibleColors[Random().nextInt(4)];
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _TransactionItemState extends State<TransactionItem> {
         leading: CircleAvatar(
           radius: 30,
           // backgroundColor: Color.fromARGB(255, 21, 21, 21),
-          backgroundColor: _bgColor,
+          backgroundColor: Colors.black,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: FittedBox(
@@ -66,13 +66,15 @@ class _TransactionItemState extends State<TransactionItem> {
           style: Theme.of(context).textTheme.titleSmall,
         ),
         trailing: MediaQuery.of(context).size.width > 460
-            ? FlatButton.icon(
+            ? TextButton.icon(
                 onPressed: () => widget.deleteTx(
                   widget.transaction.id,
                 ),
-                label: const Text('Delete'),
+                label: Text(
+                  'Delete',
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                ),
                 icon: const Icon(Icons.delete),
-                textColor: Theme.of(context).accentColor,
               )
             : IconButton(
                 icon: const Icon(Icons.delete),

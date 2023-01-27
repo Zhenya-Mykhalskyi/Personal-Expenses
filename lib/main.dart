@@ -148,8 +148,8 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     });
   }
 
-  List<Widget> _buildLandscapeContent(
-      MediaQueryData mediaQuery, AppBar appBar, Widget txListWidget) {
+  List<Widget> _buildLandscapeContent(MediaQueryData mediaQuery,
+      PreferredSizeWidget appBar, Widget txListWidget) {
     return [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -180,8 +180,8 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     ];
   }
 
-  List<Widget> _buildPortraitContent(
-      MediaQueryData mediaQuery, AppBar appBar, Widget txListWidget) {
+  List<Widget> _buildPortraitContent(MediaQueryData mediaQuery,
+      PreferredSizeWidget appBar, Widget txListWidget) {
     return [
       Container(
         height: (mediaQuery.size.height -
@@ -197,14 +197,19 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   Widget _buildAppBar() {
     return Platform.isIOS
         ? CupertinoNavigationBar(
+            backgroundColor: Theme.of(context).backgroundColor,
             middle: Text(
               'Personal Expenses',
+              style: TextStyle(color: Colors.white),
             ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  child: Icon(CupertinoIcons.add),
+                  child: Icon(
+                    CupertinoIcons.add,
+                    color: Colors.white,
+                  ),
                   onTap: () => _startAddNewTransaction(context),
                 ),
               ],
@@ -257,6 +262,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     );
     return Platform.isIOS
         ? CupertinoPageScaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
             navigationBar: appBar,
             child: pageBody,
           )
